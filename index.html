@@ -64,6 +64,7 @@ button {
   border: none;
   cursor: pointer;
   transition: transform .25s ease;
+  font-family: 'Baloo 2', cursive;
 }
 
 #yes {
@@ -151,12 +152,40 @@ button {
   50%     { transform: rotate(calc(var(--r) + 6deg)); }
 }
 
+.error {
+  color: #ff4d6d;
+  font-size: .9rem;
+  margin-top: 10px;
+  display: none;
+}
+
+
 </style>
 </head>
 
 <body>
 
 <div class="card" id="page1">
+  <h1>When did we first talk? 💬</h1>
+  <p>Enter our first chat date</p>
+
+  <input type="date" id="firstChat" class="date-input">
+
+  <button class="confirm" id="checkFirstChat">Confirm💖</button>
+  <p class="error" id="error1">Hmm… go to Instagram chat and type in the keywords from our first conversation.</p>
+</div>
+
+<div class="card" id="page2" style="display:none">
+  <h1>When did we become official?💕</h1>
+  <p>Our anniversary date</p>
+
+  <input type="date" id="anniversary" class="date-input">
+
+  <button class="confirm" id="checkAnniversary">Confirm💘</button>
+  <p class="error" id="error2">Wrong answer🤨</p>
+</div>
+
+<div class="card" id="page3" style="display:none">
   <h1>Do you love me?</h1>
   <p>Try pointing to "No"😜</p>
   <div class="buttons">
@@ -165,7 +194,7 @@ button {
   </div>
 </div>
 
-<div class="card" id="page2" style="display:none">
+<div class="card" id="page4" style="display:none">
   <h1>Really?</h1>
   <div class="buttons">
     <button id="yes2">Sure 😍</button>
@@ -173,7 +202,7 @@ button {
   </div>
 </div>
 
-<div id="page3" style="display:none">
+<div id="page5" style="display:none">
   <div class="frame-wrap">
     <div class="card">
       <h1>🎄Merry Christmas My love</h1>
@@ -195,8 +224,34 @@ button {
 const pages = [
   document.getElementById("page1"),
   document.getElementById("page2"),
-  document.getElementById("page3")
+  document.getElementById("page3"),
+  document.getElementById("page4"),
+  document.getElementById("page5")
 ];
+
+const FIRST_CHAT_DATE = "2024-12-16";   
+const ANNIVERSARY_DATE = "2025-07-17";  
+
+document.getElementById("checkFirstChat").onclick = () => {
+  music.play();
+  const input = document.getElementById("firstChat").value;
+
+  if (input === FIRST_CHAT_DATE) {
+    showPage(1);
+  } else {
+    document.getElementById("error1").style.display = "block";
+  }
+};
+
+document.getElementById("checkAnniversary").onclick = () => {
+  const input = document.getElementById("anniversary").value;
+
+  if (input === ANNIVERSARY_DATE) {
+    showPage(2);
+  } else {
+    document.getElementById("error2").style.display = "block";
+  }
+};
 
 const music = document.getElementById("bgMusic");
 
@@ -216,13 +271,11 @@ function heartEffect() {
 }
 
 document.getElementById("yes1").onclick = () => {
-  music.play();
-  showPage(1);
+  showPage(3);
 };
 
 document.getElementById("yes2").onclick = () => {
-  showPage(2);
-  music.play();
+  showPage(4);
   setInterval(heartEffect, 300);
   showFramePhotos();
 };
@@ -278,7 +331,7 @@ function showFramePhotos() {
   { top: "360px", left: "-50px" }
 ];
 
-  const wrap = document.querySelector("#page3 .frame-wrap");
+  const wrap = document.querySelector("#page5 .frame-wrap");
 
   photos.forEach((src, i) => {
     const img = document.createElement("img");
