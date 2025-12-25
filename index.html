@@ -17,7 +17,7 @@ body {
   justify-content: center;
   align-items: center;
   background: linear-gradient(180deg,#ffd6e8,#fff);
-  font-family: system-ui, sans-serif;
+  font-family: 'Quicksand', sans-serif;
   overflow: hidden;
 }
 
@@ -41,11 +41,13 @@ body {
 h1 {
   font-size: 1.5rem;
   margin-bottom: 16px;
+  font-family: 'Baloo 2', cursive;
 }
 
 p {
   color: #666;
   margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .buttons {
@@ -61,7 +63,7 @@ button {
   font-size: 1rem;
   border: none;
   cursor: pointer;
-  transition: .25s ease;
+  transition: transform .25s ease;
 }
 
 #yes {
@@ -227,12 +229,12 @@ document.getElementById("yes2").onclick = () => {
 
 document.getElementById("no1").addEventListener("mouseover", e => {
   e.target.style.transform =
-    `translate(${Math.random()*120-60}px,${Math.random()*60-30}px)`;
+    `translate(${Math.random()*220-60}px,${Math.random()*60-30}px)`;
 });
 
 document.getElementById("no2").addEventListener("mouseover", e => {
   e.target.style.transform =
-    `translate(${Math.random()*120-60}px,${Math.random()*60-30}px)`;
+    `translate(${Math.random()*220-60}px,${Math.random()*60-30}px)`;
 });
 
 function showFramePhotos() {
@@ -286,7 +288,7 @@ function showFramePhotos() {
     const rotate = Math.random() * 16 - 8;
     img.style.setProperty("--r", rotate + "deg");
 
-    if (i % 4 === 0) img.classList.add("wiggle");
+    if (i % 2 === 0) img.classList.add("wiggle");
 
     Object.assign(img.style, positions[i % positions.length]);
     img.style.animationDelay = i * 0.12 + "s";
